@@ -131,7 +131,7 @@ public class GameInputProcessor extends GDInputProcessor {
 		}
 		
 		
-		//Modify(2017.02.02 19:33 By Minseok Koo)
+		//Modify(2017.02.02 20:00 By Minseok Koo)
 		//Tower overlap problem solving
 		List<Tower> deployedTowers = state.getDeployedTowers();
 
