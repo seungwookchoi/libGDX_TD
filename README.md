@@ -10,12 +10,18 @@ Java Game Development Project using libGDX - Tower Defense
 
 17.02.07:[Minwoo Jang] Add skip function. 
 
-	gamedev-td-core/src/gamedev/input/GameInputProcessor.java
+gamedev-td-core/src/gamedev/input/GameInputProcessor.java
 
-	gamedev-td-core/src/gamedev/entity/GameState.java
+gamedev-td-core/src/gamedev/entity/GameState.java
 
-	gamedev-td-core/src/gamedev/entity/TextureFactory.java
+gamedev-td-core/src/gamedev/entity/TextureFactory.java
 
-	gamedev-td-core/src/gamedev/screen/GameUserInterface.java
+gamedev-td-core/src/gamedev/screen/GameUserInterface.java
+
+
+17.02.08:[Minwoo Jang] Delete unnessary code. (gamedev-td-core/src/gamedev/input/GameInputProcessor.java)
+
+
+17.02.09:[Minwoo Jang] Delete constructable wrong state. (gamedev-td-core/src/gamedev/entity/GameState.java)
 
 	

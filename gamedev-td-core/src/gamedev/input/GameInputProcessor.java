@@ -248,10 +248,13 @@ public class GameInputProcessor extends GDInputProcessor {
 //				boolean showTooltip = true;
 //				Point spritePoint = sprite.getPosition();
 
-				TowerType towerType = TowerFactory.interpretType(i);
-				towerToBuild = TowerFactory.createTower(towerType);
 				
-				userInterface.setTowerToBuild(towerToBuild, towerType);
+				//modify(2017.02.08 03:31 By JangMinWoo)
+				//remove under 3lines for selecting towerToBuild when mouse.LEFT clicked  
+				//TowerType towerType = TowerFactory.interpretType(i);
+				//towerToBuild = TowerFactory.createTower(towerType);
+				
+				//userInterface.setTowerToBuild(towerToBuild, towerType);
 			} else {
 				userInterface.reset();
 			}

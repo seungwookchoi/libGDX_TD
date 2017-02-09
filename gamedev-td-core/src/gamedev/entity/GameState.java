@@ -317,20 +317,14 @@ public class GameState {
 		checkskip[type]=false;
 	}
 	
-	//modify(2017.02.07 02:52 By JangMinWoo)
-	//possible place of building tower
+	//modify(2017.02.09 02:53 By JangMinWoo)
+	//make it impossible to build Tower at DartDirt,Steve as well as Dirt
 	public boolean isTowerPlaceable(Point point) {
-		/*
-		TileType type = grid[point.x /40][point.y /40];
+		
+		//TileType tile_type = grid[point.x /40][point.y /40];
 		try {
-			return point.x > 0 && point.y > 0 && (type == TileType.Grass);			
-		}catch (Exception e){
-			
-		}
-		return false;
-		*/
-		try {
-			return point.x > 0 && point.y > 0 && grid[point.x / 40][point.y / 40] != TileType.Dirt;			
+			//return point.x > 0 && point.y > 0 && tile_type != TileType.Dirt;			
+			return point.x > 0 && point.y > 0 && grid[point.x / 40][point.y / 40] != TileType.Dirt && grid[point.x / 40][point.y / 40]!=TileType.Dirt_Dark && grid[point.x / 40][point.y / 40]!=TileType.Steve;			
 		}catch (Exception e){
 			
 		}
