@@ -1,5 +1,7 @@
 package gamedev.input;
 
+import gamedev.entity.GameState;
+
 import gamedev.screen.PauseScreen;
 import gamedev.td.GDSprite;
 import gamedev.td.TowerDefense;
@@ -45,6 +47,10 @@ public class PauseInputProcessor extends GDInputProcessor{
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
 		
+		//modify(2017.02.09 19:51 By JangMinWoo)
+		//reset Stage when clicked QuitToMenu,RESTART
+		GameState instance = GameState.getInstance();
+		
 		buttons = pauseScreen.getButtons();
 		for (int i = 0; i < buttons.size(); i++) {
 			GDSprite sprite = buttons.get(i);
@@ -57,9 +63,19 @@ public class PauseInputProcessor extends GDInputProcessor{
 						break;
 					case PauseScreen.RESTART:
 						towerDefense.switchScreen(towerDefense.getGameScreen());
+
+						//modify(2017.02.09 19:51 By JangMinWoo)
+						//reset Stage when clicked RESTART
+						instance.initialize();
+						
 						break;
 					case PauseScreen.MAIN_MENU:
 						towerDefense.switchScreen(towerDefense.getMainMenuScreen());
+						
+						//modify(2017.02.09 19:51 By JangMinWoo)
+						//reset Stage when clicked QuitToMenu
+						instance.initialize();
+						
 						break;
 					case PauseScreen.EXIT:
 						System.exit(1);
@@ -107,3 +123,4 @@ public class PauseInputProcessor extends GDInputProcessor{
 
 }
 
+	

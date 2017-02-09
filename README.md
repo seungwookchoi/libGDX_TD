@@ -19,4 +19,7 @@ Java Game Development Project using libGDX - Tower Defense
 
 17.02.09:[Minwoo Jang] Fixed a problem where Steve and DartDirt installed the tower. 
 	(gamedev-td-core/src/gamedev/entity/GameState.java)
+
+17.02.09:[Minwoo Jang] When Restart and Quit button is pressed, reset.
+	(gamedev-td-core/src/gamedev/input/PauseInputProcessor.java)
 	
