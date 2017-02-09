@@ -18,5 +18,4 @@ Java Game Development Project using libGDX - Tower Defense
 
 	gamedev-td-core/src/gamedev/screen/GameUserInterface.java
 
-
 	
