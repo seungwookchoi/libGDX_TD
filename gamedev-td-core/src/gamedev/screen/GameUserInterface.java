@@ -28,7 +28,10 @@ public class GameUserInterface {
 			upgradeToSand, upgradeToFireArrow, upgradeToIceArrow,
 				tileHighlight, towerBtnHighlight, ghostTower, 
 				waveLabel, towerLabel, moneyLabel;
-
+	//modify(2017.02.05 01:46 By JangMinWoo)
+	//add SkipButton  at userInterface
+	GDSprite skipBtn;
+	
 	Tower selectedDeployedTower;
 
 	TowerRangeRenderer towerRangeRenderer;
@@ -47,30 +50,7 @@ public class GameUserInterface {
 	private Tower towerToBuild, towerToUpgrade;
 	private GDSprite[] heartSprite;
 
-	private void initializeBuildTowerButtons() {
-		btnsBuildTower = new ArrayList<GDSprite>();
-		SpriteManager spriteManager = SpriteManager.getInstance();
-
-		GDSprite dirtTower = spriteManager.getTower(TowerType.Dirt_Tower);
-		GDSprite arrowTower = spriteManager.getTower(TowerType.Arrow_Tower);
-		GDSprite eggTower = spriteManager.getTower(TowerType.Egg_Tower);
-		GDSprite potionTower = spriteManager.getTower(TowerType.Potion_Tower);
-		GDSprite currencyTower = spriteManager.getTower(TowerType.Currency_Tower);
-
-		int offset = 3, y = 13;
-		dirtTower.setPosition(Config.tileSize, y * Config.tileSize);
-		arrowTower.setPosition(Config.tileSize * 2 + offset, y * Config.tileSize);
-		eggTower.setPosition(Config.tileSize * 3 + offset * 2, y * Config.tileSize);
-		potionTower.setPosition(Config.tileSize * 4 + offset * 3, y * Config.tileSize);
-		currencyTower.setPosition(Config.tileSize * 5 + offset * 4, y * Config.tileSize);
-
-		btnsBuildTower.add(dirtTower);
-		btnsBuildTower.add(arrowTower);
-		btnsBuildTower.add(eggTower);
-		btnsBuildTower.add(potionTower);
-		btnsBuildTower.add(currencyTower);
-	}
-
+	
 	public GameUserInterface() {
 		setTowerInfo(null);
 		towerToPutSprite = null;
@@ -96,14 +76,22 @@ public class GameUserInterface {
 		infoBackground = spriteManager.getSprite("info_bg");
 		infoBackground.setPosition(300, userInterfaceY + 10);
 
+		
+		//modify(2017.02.06 02:59 By JangMinWoo)
+		//edit (Y)position of upgradeBtn,selBtn (120->100)
 		upgradeBtn = spriteManager.getSprite("upgrade_button");
-		upgradeBtn.setPosition(300, userInterfaceY + 120);
+		upgradeBtn.setPosition(300, userInterfaceY + 100);
 
 		sellBtn = spriteManager.getSprite("sell_button");
-		sellBtn.setPosition(425, userInterfaceY + 120);
+		sellBtn.setPosition(425, userInterfaceY + 100);
 
 		tileHighlight = spriteManager.getSprite("highlight");
 		towerBtnHighlight = spriteManager.getSprite("tower_highlight");
+		
+		//modify(2017.02.06 02:59 By JangMinWoo)
+		//add skip button
+		skipBtn = spriteManager.getSprite("skip_button");	
+		skipBtn.setPosition(560,userInterfaceY+10);
 		
 		towerRangeRenderer = new TowerRangeRenderer();
 		
@@ -122,14 +110,7 @@ public class GameUserInterface {
 		}
 	}
 
-	public void render(SpriteBatch spriteBatch) {
-
-	}
-
-	public void update(float delta) {
-
-	}
-
+	
 	private void initializeUpgradeButtons() {
 		SpriteManager spriteManager = SpriteManager.getInstance();
 		
@@ -151,6 +132,38 @@ public class GameUserInterface {
 		upgradeToCorruptedEgg = spriteManager.getSprite("upgrade_to_cegg");
 		upgradeToCorruptedEgg.setPosition(425, userInterfaceY + 120);
 	}
+	
+	private void initializeBuildTowerButtons() {
+		btnsBuildTower = new ArrayList<GDSprite>();
+		SpriteManager spriteManager = SpriteManager.getInstance();
+
+		GDSprite dirtTower = spriteManager.getTower(TowerType.Dirt_Tower);
+		GDSprite arrowTower = spriteManager.getTower(TowerType.Arrow_Tower);
+		GDSprite eggTower = spriteManager.getTower(TowerType.Egg_Tower);
+		GDSprite potionTower = spriteManager.getTower(TowerType.Potion_Tower);
+		GDSprite currencyTower = spriteManager.getTower(TowerType.Currency_Tower);
+
+		int offset = 3, y = 13;
+		dirtTower.setPosition(Config.tileSize, y * Config.tileSize);
+		arrowTower.setPosition(Config.tileSize * 2 + offset, y * Config.tileSize);
+		eggTower.setPosition(Config.tileSize * 3 + offset * 2, y * Config.tileSize);
+		potionTower.setPosition(Config.tileSize * 4 + offset * 3, y * Config.tileSize);
+		currencyTower.setPosition(Config.tileSize * 5 + offset * 4, y * Config.tileSize);
+
+		btnsBuildTower.add(dirtTower);
+		btnsBuildTower.add(arrowTower);
+		btnsBuildTower.add(eggTower);
+		btnsBuildTower.add(potionTower);
+		btnsBuildTower.add(currencyTower);
+	}
+
+	public void render(SpriteBatch spriteBatch) {
+
+	}
+
+	public void update(float delta) {
+
+	}
 
 	public void draw(SpriteBatch spriteBatch) {
 		towerRangeRenderer.render(); // put towerRangeRenderer outside spriteBatch begin and end (issue in drawing)
@@ -164,6 +177,12 @@ public class GameUserInterface {
 		towerLabel.draw(spriteBatch);
 		moneyLabel.draw(spriteBatch);
 		waveLabel.draw(spriteBatch);
+		
+		
+		
+		//add(2017.02.04.18:37 By Jang Minwoo)
+		//set visible skipButton
+		skipBtn.draw(spriteBatch);
 		
 		// Draw 'build tower' buttons
 		for (GDSprite tower : btnsBuildTower)
@@ -235,7 +254,7 @@ public class GameUserInterface {
 			heartSprite[i].draw(spriteBatch);
 		}
 	}
-
+	
 	public void setTowerInfo(Tower towerToBuild) {
 		this.towerToBuild = towerToBuild;
 		
@@ -264,6 +283,13 @@ public class GameUserInterface {
 
 	public GDSprite getTowerBtnHighlight() {
 		return towerBtnHighlight;
+	}
+	
+	
+	//modify(2017.02.05 01:46 By JangMinWoo)
+	//add 'get SkipButton method'  at userInterface
+	public GDSprite getSkipButton(){
+		return skipBtn;
 	}
 
 	public void setTowerToBuild(Tower towerToBuild, TowerType towerType) {

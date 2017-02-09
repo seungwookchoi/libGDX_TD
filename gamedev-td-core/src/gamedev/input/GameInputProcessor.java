@@ -62,7 +62,7 @@ public class GameInputProcessor extends GDInputProcessor {
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button) {
 
-		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {											
+		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
 			// Step 1
 			selectTowerToBuild(x, y, pointer, button);
 
@@ -71,10 +71,17 @@ public class GameInputProcessor extends GDInputProcessor {
 
 			// Step 1
 			selectTowerToUpgrade(x, y, pointer, button);
-		} else if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {	
-			resetInteractions();
 			
+			
+			//Modify(2017.02.04 23:39 By JangMinWoo)
+			//Pressed Skip Button
+			skipRound(x, y, pointer, button);
+			
+			
+		} else if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
+			resetInteractions();
 		}
+
 		return false;
 	}
 
@@ -85,23 +92,7 @@ public class GameInputProcessor extends GDInputProcessor {
 		userInterface.setTowerRange(null);
 		userInterface.setGhostTower(null);
 		System.out.println("[Inform] Nothing selected");
-	}
 
-	private void selectTowerToUpgrade(int x, int y, int pointer, int button) {
-		GameState state = GameState.getInstance();
-
-		List<Tower> deployedTowers = state.getDeployedTowers();
-
-		for (int i = 0; i < deployedTowers.size(); i++) {
-			Tower tower = deployedTowers.get(i);
-			GDSprite sprite = tower.getSprite();
-
-			if (sprite.contains(x, y)) {
-				selectedTower = tower;
-				userInterface.setTowerToUpgrade(tower);
-				System.out.println("[Input] User selected a tower, " + selectedTower.getTowerName() + " found at " + selectedTower.getPosition());
-			}
-		}
 	}
 
 	private void selectTowerToBuild(int x, int y, int pointer, int button) {
@@ -138,7 +129,7 @@ public class GameInputProcessor extends GDInputProcessor {
 		for (int i = 0; i < deployedTowers.size(); i++) {
 			Tower tower = deployedTowers.get(i);
 			GDSprite sprite = tower.getSprite();
-
+	
 			if (sprite.contains(x, y)) {
 				System.out.println("[Inform] The tower already exists.");
 				return ;
@@ -151,12 +142,51 @@ public class GameInputProcessor extends GDInputProcessor {
 				state.buildTower(towerToBuild.clone(), point);			
 			}else{
 				System.out.println("[Input] User cannot build a " + towerToBuild.getTowerName() + " because he/she does not have money.");
+				
 				//Modify(2017.02.02 19:33 By Youngin Cho)
 				userInterface.reset();
-			}
+			}	
+			//towerToBuild = null;
+			//userInterface.setTowerRange(null);
+			//userInterface.setGhostTower(null);
+			
 			//Modify(2017.02.02 19:33 By Youngin Cho)
 			//userInterface.reset();
 		}
+	}
+	
+	private void selectTowerToUpgrade(int x, int y, int pointer, int button) {
+		GameState state = GameState.getInstance();
+
+		List<Tower> deployedTowers = state.getDeployedTowers();
+
+		for (int i = 0; i < deployedTowers.size(); i++) {
+			Tower tower = deployedTowers.get(i);
+			GDSprite sprite = tower.getSprite();
+
+			if (sprite.contains(x, y)) {
+				selectedTower = tower;
+				userInterface.setTowerToUpgrade(tower);
+				System.out.println("[Input] User selected a tower, " + selectedTower.getTowerName() + " found at " + selectedTower.getPosition());
+			}
+		}
+	}
+
+	
+	
+	//Modify(2017.02.04 23:39 By JangMinWoo)
+	//Pressed Skip Button
+	private void skipRound(int x ,int y, int position, int button){
+			
+		GDSprite sprite = userInterface.getSkipButton();
+		GameState instance = GameState.getInstance();
+		
+		if(sprite.contains(x,y)){
+			System.out.println("[Inform] User use skip button");
+			instance.pressedCheckSkip(0);	
+			instance.pressedCheckSkip(1);	
+		}	
+			
 	}
 	
 	
@@ -173,7 +203,7 @@ public class GameInputProcessor extends GDInputProcessor {
 		}
 		
 	}
-
+	
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
@@ -195,10 +225,10 @@ public class GameInputProcessor extends GDInputProcessor {
 			userInterface.setGhostTowerLocation(point);
 			towerToBuild.getPosition().set(MathHelper.PointToVector2(point));
 		}
-		
+	
 		
 // TODO: Don't know what this code is for
-		
+//		GameState state = GameState.getInstance();
 //		if (selectedTower == null) {
 //			if (state.isTowerPlaceable(point) == false) {
 //				gameScreen.getTowerRangeRenderer().setColor(red);

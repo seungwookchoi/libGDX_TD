@@ -155,6 +155,14 @@ public class TextureFactory {
 			}
 			
 			
+			//modify(2017.02.06 03:57 By JangMinWoo)
+			//add SkipButton PNG  at TextureFactory			
+			else if(key.equals("skip_button")){
+				path = "assets/img/skip_button.png";
+			}
+			
+			
+			
 			
 			else{
 				return null;

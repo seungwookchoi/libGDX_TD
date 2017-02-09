@@ -43,6 +43,11 @@ public class GameState {
 	private List<Projectile> projectiles;
 
 	private boolean roundHasStarted;
+	
+	//modify(2017.02.06 16:39 By JangMinWoo)
+	//add checkskip field
+	private boolean[] checkskip={false,false};  //[0]: Enemy/Tower/Projectile, [1]: RoundTime
+
 
 	public static GameState getInstance() {
 		if (instance == null)
@@ -91,22 +96,47 @@ public class GameState {
 		updateRoundTimer(delta);
 
 		if (roundHasStarted) {
-			checkForEnemySpawn(delta);
-
-			for (Enemy enemy : enemies)
-				enemy.update(delta);
-
-			for (Tower tower : deployedTowers)
-				tower.update(delta);
 			
-			for(Projectile projectile : projectiles)
-				projectile.update(delta);
+			//modify(2017.02.07 04:30 By JangMinWoo)
+			//adapt Skipbutton (movement of enemy)
+			GameState instance = GameState.getInstance();
+			int N;
+			if(!instance.getCheckSkip(0)) N=1;
+			else N=200;	//about 5sec later
+			
+			for(int i=0;i<N;i++){	
+			
+				checkForEnemySpawn(delta);
+
+				for (Enemy enemy : enemies)
+					enemy.update(delta);
+
+				for (Tower tower : deployedTowers)
+					tower.update(delta);
+			
+				for(Projectile projectile : projectiles)
+					projectile.update(delta);
+			
+			}
+			if(N==200) instance.depressedCheckSkip(0);
 			
 		}
 		
 	}
 
 	private void updateRoundTimer(float delta) {
+		
+		
+		//modify(2017.02.07 06:36 By JangMinWoo)
+		//adapt Skipbutton (update round time)
+		GameState instance = GameState.getInstance();
+		
+		if(instance.getCheckSkip(1)){		//'5sec' is about skipTime
+			roundTime-=5;
+			instance.depressedCheckSkip(1);
+		}
+		
+		
 		if (roundTime > 0) {
 			roundTime -= delta;
 		}
@@ -117,6 +147,11 @@ public class GameState {
 			prepareLevel(level++);
 			spawnedEnemies = 0;
 		}
+		
+		
+		
+		
+		
 	}
 
 	public void render(SpriteBatch spriteBatch) {
@@ -268,14 +303,39 @@ public class GameState {
 		
 	}
 	
-
+	//modify(2017.02.06 05:57 By JangMinWoo)
+	//add getcheck,pressed,depressed method  at GameState
+	public boolean getCheckSkip(int type){
+		return checkskip[type];
+	}
+	public void pressedCheckSkip(int type){
+		System.out.println("Pressed the CheckSkip Button");;
+		checkskip[type] = true;
+	}
+	public void depressedCheckSkip(int type){
+		System.out.println("Depressed the CheckSkip Button");;
+		checkskip[type]=false;
+	}
+	
+	//modify(2017.02.07 02:52 By JangMinWoo)
+	//possible place of building tower
 	public boolean isTowerPlaceable(Point point) {
+		/*
+		TileType type = grid[point.x /40][point.y /40];
+		try {
+			return point.x > 0 && point.y > 0 && (type == TileType.Grass);			
+		}catch (Exception e){
+			
+		}
+		return false;
+		*/
 		try {
 			return point.x > 0 && point.y > 0 && grid[point.x / 40][point.y / 40] != TileType.Dirt;			
 		}catch (Exception e){
 			
 		}
 		return false;
+		
 	}
 
 	public void buildTower(Tower towerToBuild, Point point) {
