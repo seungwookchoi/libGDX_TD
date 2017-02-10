@@ -1,4 +1,4 @@
-# libGDX_Tower_Defense
+# libGDX_TD
 Java Game Development Group Project using libGDX - Tower Defense
 
 ## Collaborated with
@@ -8,7 +8,7 @@ Java Game Development Group Project using libGDX - Tower Defense
 [ChoYoungIn]: https://github.com/ChoYoungIn
 [seungwookchoi]: https://github.com/seungwookchoi
 
-## Commit
+## Commit Note
 17.02.02:[Minseok Koo] Tower overlap problem solving. 
 	(gamedev-td-core/src/gamedev/input/GameInputProcessor.java)
 
