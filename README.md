@@ -2,7 +2,11 @@
 Java Game Development Group Project using libGDX - Tower Defense
 
 ## Collaborated with
- Minwoo Jang([jmw1038]), Youngin Cho(ChoYoungIn), Seungwook Choi(seungwookchoi), Yeoseul Cho.
+ Minwoo Jang([jmw1038]), Youngin Cho([ChoYoungIn]), Seungwook Choi([seungwookchoi]), Yeoseul Cho.
+
+[jmw1038] : https://github.com/jmw1038
+[ChoYoungIn] : https://github.com/ChoYoungIn
+[seungwookchoi] : https://github.com/seungwookchoi
 
 ## Commit
 17.02.02:[Minseok Koo] Tower overlap problem solving. 
