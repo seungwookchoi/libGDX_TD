@@ -1,10 +1,10 @@
 # libGDX_Tower_Defense
-Java Game Development Project using libGDX - Tower Defense
+Java Game Development Group Project using libGDX - Tower Defense
 
-# Collaborated with
+## Collaborated with
  Minwoo Jang(jmw1038), Youngin Cho(ChoYoungIn), Seungwook Choi(seungwookchoi), Yeoseul Cho.
 
-# Commit
+## Commit
 17.02.02:[Minseok Koo] Tower overlap problem solving. 
 	(gamedev-td-core/src/gamedev/input/GameInputProcessor.java)
 
