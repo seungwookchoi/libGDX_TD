@@ -1,5 +1,7 @@
 # libGDX_TD
-Java Game Development Group Project using libGDX - Tower Defense
+Java Game Development Group Project using [libGDX] - Tower Defense
+
+[libGDX]: https://libgdx.badlogicgames.com/
 
 ## Collaborated with
  Minwoo Jang([jmw1038]), Youngin Cho([ChoYoungIn]), Seungwook Choi([seungwookchoi]), Yeoseul Cho().
