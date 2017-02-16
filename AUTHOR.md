@@ -1,1 +1,1 @@
-@Minseok Koo<kei98301@naver.com>
+@Minseok Koo[kei98301@naver.com]
